@@ -49,38 +49,6 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:verify-call>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="Calculate_Commission-test" doc:id="2236cbf6-56eb-493b-9116-01a39ff565e8" >
-		<munit:behavior >
-			<munit:set-event doc:name="Set Input" doc:id="42c12b70-5cfa-473c-84fa-95a73dd712a1" >
-				<munit:payload value="#[output application/json --- readUrl('classpath://CalculateCommissiontest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
-				<munit:attributes value="#[readUrl('classpath://CalculateCommissiontest\set-event_attributes.dwl')]" />
-				<munit:variables >
-					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://CalculateCommissiontest\set-event_variable_.dwl')]" />
-				</munit:variables>
-			</munit:set-event>
-		</munit:behavior>
-		<munit:execution >
-			<flow-ref doc:name="Flow-ref to Calculate_Commission" doc:id="19dcd1e6-df42-4cf5-8938-bf515c183653" name="Calculate_Commission"/>
-		</munit:execution>
-		<munit:validation >
-			<munit-tools:assert doc:name="Assert payload" doc:id="3ada6a28-6151-4afb-b08a-a2bd9e38c53f" message="The payload does not match">
-				<munit-tools:that ><![CDATA[#[%dw 2.0
-import CalculateCommissiontest::assert_expression_payload
----
-assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
-			</munit-tools:assert>
-			<munit-tools:verify-call doc:name="Verify Set Payload" doc:id="3621ce5a-ab75-4ed0-9f85-5d03d88cff21" processor="set-payload" times="1">
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="136b0b6c-d6cf-4cec-b26c-53aeb8398015" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-			</munit-tools:verify-call>
-			<munit-tools:verify-call doc:name="Verify Commission_Request" doc:id="507ddc20-539b-4146-a94a-098ee87f93f3" processor="http:request" atMost="1">
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="2e8e8c6d-b1c6-4b39-8eb3-d9dd0252ddef" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-			</munit-tools:verify-call>
-		</munit:validation>
-	</munit:test>
 
 
 </mule>
