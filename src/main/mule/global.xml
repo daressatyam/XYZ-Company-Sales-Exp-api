@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<http:request-config name="ProccessAPI_Request" doc:name="HTTP Request configuration" doc:id="0c077a84-1e91-47b9-81a4-7c80b8fda1d9" >
+		<http:request-connection host="${process.host}" port="${port}"/>
+	</http:request-config>
+	<http:request-config name="CommissionRequest" doc:name="HTTP Request configuration" doc:id="df23a3ad-c488-4d82-a6db-20d494334a8a" >
+		<http:request-connection host="${commission.host}" port="${port}" />
+	</http:request-config>
+	<global-property doc:name="Global Property" doc:id="b6f8a095-7d83-42b5-97de-6e6fbfed6072" name="env" value="dev" />
+	<configuration-properties doc:name="Configuration properties" doc:id="10b38c10-1296-46b9-a1e4-40ab36a41fd5" file="config/${env}.yaml" />
+	<api-gateway:autodiscovery apiId="16861574" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="de2e36b4-332b-4fbb-a585-472985863b13" flowRef="xyz_sales_exp_api-main" />
+</mule>

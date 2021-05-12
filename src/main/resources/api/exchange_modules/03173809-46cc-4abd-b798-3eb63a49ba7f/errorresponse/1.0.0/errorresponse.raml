@@ -1,0 +1,47 @@
+#%RAML 1.0 Trait
+
+responses:
+  400:
+    body:
+      application/json:
+        example:
+          value:  'Unauthorized Access'
+  401:
+    body:
+      application/json:
+        example:
+          value: 'Bad Request'
+  403:
+    body:
+      application/json:
+        example:
+          value: 'forbidden'
+    
+  405:
+    body:
+      application/json:
+        example:
+          value: 'Method not allowed'
+  408:
+    body:
+      application/json:
+        example:
+          value: 'Request Timeout'
+  415:
+    body:
+      application/json:
+        example:
+          value: 'Unsupported Media Type'
+  418:
+    body:
+      application/json:
+        example:
+          value: 'I am teapot'
+    
+  500:
+    body:
+      application/json:
+        example:
+          value: 'Internal Server Error'
+
+          

@@ -1,0 +1,52 @@
+#%RAML 1.0
+title: XYZ_SALES_EXP_API
+version: 1.0
+description:  XYZ Company API to Intregate Process API and Commission API
+
+
+types:
+  salesdataType: !include /exchange_modules/03173809-46cc-4abd-b798-3eb63a49ba7f/salesdata/1.0.4/salesdata.raml
+
+traits: 
+  errorresponse: !include exchange_modules/03173809-46cc-4abd-b798-3eb63a49ba7f/errorresponse/1.0.0/errorresponse.raml
+securitySchemes:
+  Oauth: !include exchange_modules/03173809-46cc-4abd-b798-3eb63a49ba7f/oauth20/1.0.0/oauth20.raml
+
+
+
+securedBy: [Oauth]
+/getsalesdetails:
+    is: [errorresponse]
+    displayName: Get the New Sales Details
+    description:  To get the salesdata user orderID
+    get:
+      queryParameters:
+        orderID:
+          displayName: OrderID
+          required: true
+          default: 535113847
+          type: integer
+          example: 1234567
+      responses:
+        200:
+          body:
+            application/json:
+              examples:
+                input: !include salesdataexample.raml
+/commission:
+  is: [errorresponse]
+  displayName: Calculate Commission
+  description: commission is calculated and stored in a separate commission table for each sales order.
+  post:
+    displayName: Add record 
+    body:
+      application/json:
+        type: salesdataType
+        example: !include salesdataexample.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              value:  Record Added
+  

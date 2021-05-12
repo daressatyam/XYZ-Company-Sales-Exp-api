@@ -1,0 +1,22 @@
+#%RAML 1.0 SecurityScheme
+
+type: OAuth 2.0
+describedBy:
+  headers:
+    Authorization:
+      description: This is used to send a valid access token.
+      type: string
+  responses:
+    400:
+      description: Invalid Token
+    401:
+      description: Unauthorized Access
+    403:
+      description: Invalid Credentials
+    500:
+      description: Bad Response
+settings:
+  authorizationGrants:  implicit
+  authorizationUri: http://oauth2providerdemo.us-e2.cloudhub.io/authorize
+  accessTokenUri: http://oauth2providerdemo.us-e2.cloudhub.io/access_token
+  

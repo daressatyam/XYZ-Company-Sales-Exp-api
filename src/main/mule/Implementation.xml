@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="Get_Sales_Details" doc:id="726a642f-5fdb-49a1-9a23-6f65db03539e" >
+		<logger level="INFO" doc:name="Logger" doc:id="291eb006-718e-402a-a16a-f78915bf8752" />
+		<http:request method="GET" doc:name="ProcessAPI_Request" doc:id="bfee84a7-ea1e-44ed-a794-dd37e9a47769" config-ref="ProccessAPI_Request" path="${process.path}">
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"orderID" : vars."orderID"
+}]]]></http:query-params>
+		</http:request>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="31d38406-57b5-4dbd-995e-106b96aea9c2" />
+		<logger level="INFO" doc:name="Logger" doc:id="3fb40c63-5dc0-47e0-9d36-4cb27d5038ea" message="#[payload]"/>
+	</flow>
+	<flow name="Calculate_Commission" doc:id="b10f01f7-73ae-40ec-93a0-ee3d7eafe23e" >
+		<logger level="INFO" doc:name="Logger" doc:id="9369155e-0ae0-4efe-b5dc-8a0aded1830a" />
+		<http:request method="POST" doc:name="Commission_Request" doc:id="2e8e8c6d-b1c6-4b39-8eb3-d9dd0252ddef" config-ref="CommissionRequest" path="${commission.path}"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="136b0b6c-d6cf-4cec-b26c-53aeb8398015" />
+		<logger level="INFO" doc:name="Logger" doc:id="ab562693-a5a4-49a7-95af-b5719c1cb866" message="#[payload]"/>
+	</flow>
+</mule>

@@ -1,0 +1,10 @@
+process:
+  host: "xyz-process-api.us-e2.cloudhub.io"
+  path: "/api/getsalesdata"
+ 
+commission:
+  host: "xyz-commission-api.us-e2.cloudhub.io"
+  path: "/api/commission"
+
+port: "80"
+

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="Implementation-suite.xml" />
+	<munit:test name="Get_Sales_Details-test" doc:id="90e69ee5-c7e4-42ed-acd6-cb36e7512041" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock ProcessAPI_Request" doc:id="99c8d34b-a3d3-4d41-a889-047c0fd6c367" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bfee84a7-ea1e-44ed-a794-dd37e9a47769" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://GetSalesDetailstest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://GetSalesDetailstest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://GetSalesDetailstest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="orderID" value="#[output application/java --- readUrl('classpath://GetSalesDetailstest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="800818e3-0b2c-469b-8812-e316e6154880" >
+				<munit:payload value="#[readUrl('classpath://GetSalesDetailstest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://GetSalesDetailstest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://GetSalesDetailstest\set-event_variable_.dwl')]" />
+					<munit:variable key="orderID" value="#[output application/java --- readUrl('classpath://GetSalesDetailstest\set-event_variable_1.dwl')]" encoding="UTF-8" mediaType="application/java" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to Get_Sales_Details" doc:id="6eea0e47-68c3-4625-9e00-0af43fb0b662" name="Get_Sales_Details"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="ba72db65-55e8-4a3f-a366-43afeb46a1f6" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import GetSalesDetailstest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Set Payload" doc:id="25bad5e0-baa5-4cd2-8e77-a4009f337cb8" processor="set-payload" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="31d38406-57b5-4dbd-995e-106b96aea9c2" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="Calculate_Commission-test" doc:id="2236cbf6-56eb-493b-9116-01a39ff565e8" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="42c12b70-5cfa-473c-84fa-95a73dd712a1" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://CalculateCommissiontest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://CalculateCommissiontest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://CalculateCommissiontest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to Calculate_Commission" doc:id="19dcd1e6-df42-4cf5-8938-bf515c183653" name="Calculate_Commission"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="3ada6a28-6151-4afb-b08a-a2bd9e38c53f" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import CalculateCommissiontest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Set Payload" doc:id="3621ce5a-ab75-4ed0-9f85-5d03d88cff21" processor="set-payload" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="136b0b6c-d6cf-4cec-b26c-53aeb8398015" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Commission_Request" doc:id="507ddc20-539b-4146-a94a-098ee87f93f3" processor="http:request" atMost="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="2e8e8c6d-b1c6-4b39-8eb3-d9dd0252ddef" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
