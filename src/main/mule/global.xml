@@ -13,4 +13,5 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
 	</http:request-config>
 	<global-property doc:name="Global Property" doc:id="b6f8a095-7d83-42b5-97de-6e6fbfed6072" name="env" value="dev" />
 	<configuration-properties doc:name="Configuration properties" doc:id="10b38c10-1296-46b9-a1e4-40ab36a41fd5" file="config/${env}.yaml" />
+	<api-gateway:autodiscovery apiId="16861574" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="b12099c0-c42f-476d-85cb-38aceeff3380" flowRef="xyz_sales_exp_api-main" />
 </mule>
