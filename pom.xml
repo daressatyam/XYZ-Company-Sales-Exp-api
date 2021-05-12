@@ -93,11 +93,6 @@
             <classifier>mule-plugin</classifier>
             <scope>test</scope>
         </dependency>
-    	<dependency>
-            <groupId>com.mycompany</groupId>
-            <artifactId>salesforce-generic-error-handler</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
 
 	<repositories>
