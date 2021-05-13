@@ -5,12 +5,11 @@ description:  XYZ Company API to Intregate Process API and Commission API
 
 
 types:
-  salesdataType: !include /exchange_modules/03173809-46cc-4abd-b798-3eb63a49ba7f/salesdata/1.0.4/salesdata.raml
-
+  salesdataType: !include exchange_modules/70bffd54-7b22-43c9-a97a-fb9ce961252f/salesdata/1.0.0/salesdata.raml
 traits: 
-  errorresponse: !include exchange_modules/03173809-46cc-4abd-b798-3eb63a49ba7f/errorresponse/1.0.0/errorresponse.raml
+  errorresponse: !include exchange_modules/70bffd54-7b22-43c9-a97a-fb9ce961252f/errorresponse/1.0.0/errorresponse.raml
 securitySchemes:
-  Oauth: !include exchange_modules/03173809-46cc-4abd-b798-3eb63a49ba7f/oauth20/1.0.0/oauth20.raml
+  Oauth: !include exchange_modules/70bffd54-7b22-43c9-a97a-fb9ce961252f/oauth20/1.0.1/oauth20.raml
 
 
 
@@ -31,6 +30,7 @@ securedBy: [Oauth]
         200:
           body:
             application/json:
+              type: salesdataType
               examples:
                 input: !include salesdataexample.raml
 /commission:
